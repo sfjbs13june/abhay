@@ -22,7 +22,7 @@ public class HelloControllerIntegrationTest {
 @Autowired
     private MockMvc mockMvc;
 
-@Test
+    @Test
     public void testHelloControllerHello() throws Exception {
     ResultActions responseEntity = mockMvc.perform(get("/hello"));
     responseEntity.andExpect(status().isOk());
