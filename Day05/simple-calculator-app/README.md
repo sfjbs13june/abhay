@@ -1,13 +1,17 @@
-`` Create the Calculator-app ``
+```` Create the Calculator-app ````
+
 https://start.spring.io/
 
-``Build the application ``
+````Build the application ````
+
 mvn clean install
 
-``Run the application``
+````Run the application````
+
 mvn spring-boot:run
 
-`` Testing the application``
+````Testing the application````
+
 Addition == curl --location --request GET 'localhost:8080/add?a=10&b=20'
 
 Subtraction == curl --location --request POST 'localhost:8080/sub?a=12&b=2'
