@@ -19,11 +19,36 @@ mvn spring-boot:run
 ### Testing the application
 
 ```
-Addition == curl --location --request GET 'localhost:8080/add?a=10&b=20'
+Put = curl --location --request PUT 'localhost:8081/patient/update?disease=cough&age=22' 
 
-Subtraction == curl --location --request POST 'localhost:8080/sub?a=12&b=2'
+Post = curl --location --request POST 'localhost:8081/patient/save' 
+```
 
-Multiplication == curl --location --request PUT 'localhost:8080/mul?a=13&b=1'
+### Security for application
 
-Division == curl --location --request DELETE 'localhost:8080/div?a=10&b=4'
+```
+Put = curl --location --request PUT 'localhost:8081/patient/update?disease=cough&age=22' \
+--header 'Authorization: Basic cmFodWwxMjM6cGFzc3dvcmQ=' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: JSESSIONID=737554989FD154A178D2144BC56492FC' \
+--data-raw '{
+     "id" : "123",
+     "name" : "pat123",
+     "age" : "3",
+    "gender" : "male",
+    "disease" : "bactrial"
+}' 
+
+Post = curl --location --request POST 'localhost:8081/patient/save' \
+--header 'Authorization: Basic YWJoYXkxMjM6cGFzc3dvcmQ=' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: JSESSIONID=737554989FD154A178D2144BC56492FC' \
+--data-raw '{
+     "id" : "123",
+     "name" : "pat123",
+     "age" : "3",
+    "gender" : "male",
+    "disease" : "bactrial"
+}' 
+
 ```
