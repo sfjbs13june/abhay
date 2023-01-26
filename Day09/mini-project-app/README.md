@@ -15,4 +15,22 @@ mvn clean install
 mvn spring-boot:run
 ```
 
+### Dockerization
+
+```
+mvn install dockerfile:build
+```
+
+### List Docker Images
+
+```
+docker Images
+```
+
+### List Docker Contianer
+
+```
+docker ps
+```
+
 

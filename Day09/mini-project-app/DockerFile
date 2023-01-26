@@ -1,27 +1,5 @@
-docker ps
-
-docker ps -a
-
-docker rm <container-ID>
-
-docker stop <container-ID>
-
-docker login
-
-docker images
-
-docker push <REPOSITORY>:<TAG>
-
-docker rmi <IMAGE ID>
-
-docker run <REPOSITORY>:<Run>
-
-docker run <REPOSITORY>:<TAG>
-
-docker exec -ti <container-id>/bin/sh
-
-docker pull <REPO>:<tag>
-
-### Docker Network -
-
-docker network ls
+FROM openjdk
+VOLUME /tmp
+ARG JAR_FILE
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
