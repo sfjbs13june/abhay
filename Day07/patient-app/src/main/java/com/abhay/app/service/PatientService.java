@@ -1,7 +1,7 @@
 package com.abhay.app.service;
 
 
-import com.abhay.app.model.Patient;
+import com.abhay.app.controller.Patient;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 

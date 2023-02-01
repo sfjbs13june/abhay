@@ -1,11 +1,11 @@
-package com.abhay.app.model;
+package com.abhay.app.controller;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class Patient {
 
-    String id;
+    String patid;
     String name;
     String age;
     String gender;
@@ -16,16 +16,16 @@ public class Patient {
 
 
     }
-    public Patient(String id, String name, String age, String gender, String disease) {
-        this.id = id;
+    public Patient(String patid, String name, String age, String gender, String disease) {
+        this.patid = patid;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.disease = disease;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setPatId(String patid) {
+        this.patid = patid;
     }
 
     public void setName(String name) {
@@ -45,8 +45,8 @@ public class Patient {
     }
 
 
-    public String getId() {
-        return id;
+    public String getPatId() {
+        return patid;
     }
 
     public String getName() {

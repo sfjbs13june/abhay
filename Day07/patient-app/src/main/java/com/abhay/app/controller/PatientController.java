@@ -1,43 +1,45 @@
 package com.abhay.app.controller;
 
 
-import com.abhay.app.exception.*;
-import com.abhay.app.model.Patient;
-import com.abhay.app.service.PatientService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/patient")
 public class PatientController {
 
     @Autowired
-    PatientService patientService;
+    PatientRepository patientRepository;
 
-    @PostMapping("/patient/save")
-    public Patient savePatient(@RequestBody Patient patient) throws PatientIdNotFoundException, PatientNameNotFoundException, PatientAgeNotFoundException , PatientGenderNotFoundException,PatientDiseaseNotFoundException {
-        if(patient.getId() == null){
-               throw new PatientIdNotFoundException("Patient id is not found");
-        }
-        if(patient.getName() == null){
-            throw new PatientNameNotFoundException("Patient name is not found");
-        }
-        if(patient.getAge() == null){
-            throw new PatientAgeNotFoundException("Patient age is not found");
-        }
-        if(patient.getGender() == null){
-            throw new PatientGenderNotFoundException("Patient gender is not found");
-        }
-        if(patient.getDisease() == null){
-            throw new PatientDiseaseNotFoundException("Patient disease is not found");
-        }
-        System.out.println(patient);
+
+    @RequestMapping(value="/create",method = RequestMethod.POST)
+    public Patient create(@RequestBody Patient patient)  {
+        patient = patientRepository.save(patient);
         return patient;
     }
 
-    @PutMapping("/patient/update")
-    public Patient updateDetail(@RequestBody Patient patient, @RequestParam("disease") String disease,@RequestParam("age") String age){
-        return patientService.updateDetail(patient,disease,age);
+   @RequestMapping(value = "/read",method = RequestMethod.GET)
+    public List<Patient> readPatient(){
+        return patientRepository.findAll();
+   }
 
+   @RequestMapping(value = "/update",method = RequestMethod.PUT)
+    public void modifyPatient(@RequestParam String patid, @RequestParam String name){
+       Patient patient = patientRepository.findByName(name);
+       patient.setPatId(patid);
+       patientRepository.save(patient);
+   }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public void deleteByID(@RequestParam String name) {
+        patientRepository.deleteByname(name);
     }
 
+    @RequestMapping(value = "/findByid", method = RequestMethod.GET)
+    public void findByID(@RequestParam String patid) {
+        patientRepository.findBypatId(patid);
+    }
 }
