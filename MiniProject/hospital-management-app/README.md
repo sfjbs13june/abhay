@@ -7,13 +7,25 @@ https://start.spring.io/
 ### Run the application
 
 ```
-docker-compose -f docker-compose-mongo.yml up -d
-docker-compose -f docker-compose-mongo.yml down
+mvn clean install
 ```
 
 ### Build the application
 ```
 mvn spring-boot:run
+```
+
+### Dockerization
+
+```
+mvn install dockerfile:build
+```
+
+### Docker compose
+
+```
+docker-compose -f docker-compose-mongo.yml up -d
+docker-compose -f docker-compose-mongo.yml down
 ```
 
 ### DoctorController
@@ -139,9 +151,3 @@ http://localhost:8080/swagger-ui/index.html
 
 ```
 
-### Docker compose
-
-```
-docker-compose -f docker-compose-mongo.yml up -d
-docker-compose -f docker-compose-mongo.yml down
-```
