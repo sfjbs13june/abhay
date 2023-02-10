@@ -34,11 +34,13 @@ docker-compose -f docker-compose-mongo.yml down
 
 ```
 curl --location --request POST 'localhost:8080/doctor/save' \
+--header 'Authorization: Basic ZG9jdG9yMTIzOnBhc3N3b3Jk' \
 --header 'Content-Type: application/json' \
+--header 'Cookie: JSESSIONID=8E0722A54E25ECA20D2ACBA1EADC1951' \
 --data-raw '{
-"appointmentId" : "105",
+"appointmentId" : "111",
 "patientName":"Ram",
-"doctorName":"Dr.rakesh",
+"doctorName":"Dr.pratik",
 "date":"12th march",
 "prescription":
 {
@@ -46,7 +48,7 @@ curl --location --request POST 'localhost:8080/doctor/save' \
 "appointmentId":"102",
 "description":"He had fever",
 "patientName":"Ram",
-"doctorName":"Dr.rakesh"
+"doctorName":"Dr.pratik"
 }
 }'
 
@@ -55,9 +57,9 @@ curl --location --request POST 'localhost:8080/doctor/save' \
 ### GET 
 
 ```
-curl --location --request GET 'localhost:8080/doctor/appointment?doctorName=Dr.rakesh' \
+curl --location --request GET 'localhost:8080/doctor/appointment?doctorName=Dr.pratik' \
 --header 'Authorization: Basic ZG9jdG9yMTIzOnBhc3N3b3Jk' \
---header 'Cookie: JSESSIONID=AB8EFBD74E5DEDFD1DCFB63563B24CFA'
+--header 'Cookie: JSESSIONID=8E0722A54E25ECA20D2ACBA1EADC1951'
 
 ```
 ### PatientController
@@ -68,28 +70,31 @@ curl --location --request GET 'localhost:8080/doctor/appointment?doctorName=Dr.r
 curl --location --request POST 'localhost:8080/patient/save' \
 --header 'Authorization: Basic cGF0aWVudDEyMzpwYXNzd29yZA==' \
 --header 'Content-Type: application/json' \
---header 'Cookie: JSESSIONID=AB8EFBD74E5DEDFD1DCFB63563B24CFA' \
+--header 'Cookie: JSESSIONID=8E0722A54E25ECA20D2ACBA1EADC1951' \
 --data-raw '{
-    "appointmentId": "104",
-    "patientName": "ayush",
+    "appointmentId": "106",
+    "patientName": "mukul",
     "doctorName": "Dr.pratik",
     "date": "10feb 2023",
    "prescription": 
         {
             "prescriptionId": "10pres",
-            "appointmentId": "104",
-            "description": "cold and cough",
-            "patientName": "ayush",
+            "appointmentId": "10",
+            "description": "pain",
+            "patientName": "mukul",
             "doctorName": "Dr.pratik"
         }
     
 }'
+
 ```
 
 ### GET
 
 ```
-curl --location --request GET 'localhost:8080/patient/myappointment?patientName=abhay'
+curl --location --request GET 'localhost:8080/patient/myappointment?patientName=mukul' \
+--header 'Authorization: Basic cGF0aWVudDEyMzpwYXNzd29yZA==' \
+--header 'Cookie: JSESSIONID=8E0722A54E25ECA20D2ACBA1EADC1951'
 
 ```
 
@@ -99,20 +104,23 @@ curl --location --request GET 'localhost:8080/patient/myappointment?patientName=
 
 ```
 curl --location --request POST 'localhost:8080/prescription/saveprescription' \
+--header 'Authorization: Basic ZG9jdG9yMTIzOnBhc3N3b3Jk' \
 --header 'Content-Type: application/json' \
+--header 'Cookie: JSESSIONID=8E0722A54E25ECA20D2ACBA1EADC1951' \
 --data-raw '{
-    "prescriptionId": "03pres",
-    "appointmentId": "102",
-    "description": "headache disease",
+    "prescriptionId": "08pres",
+    "appointmentId": "110",
+    "description": "eye problem",
     "patientName": "abhay",
-    "doctorName": "MR.Vinayak"
+    "doctorName": "Dr.pratik"
 }'
 ```
 
 ### GET
 
 ```
-curl --location --request GET 'localhost:8080/prescription/viewprescription?patientName=abhay'
+curl --location --request GET 'localhost:8080/prescription/viewprescription?patientName=abhay' \
+--header 'Cookie: JSESSIONID=8E0722A54E25ECA20D2ACBA1EADC1951'
 ```
 
 ### Security

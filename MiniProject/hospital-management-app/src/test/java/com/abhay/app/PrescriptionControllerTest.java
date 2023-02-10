@@ -39,19 +39,33 @@ public class PrescriptionControllerTest {
 
     @Test
     public void getAllPrescriptionTest(){
-        List list = new ArrayList();
-        when(prescriptionRepository.findByPatientName(anyString())).thenReturn(list);
-        List result = prescriptionController.getAllPrescription("raj");
+        List<Prescription> prescriptions = new ArrayList();
+        Prescription prescription1 = new Prescription("01pres","01","this medicin is for headache","yash","Dr.bala");
+        prescriptions.add(prescription1);
+        when(prescriptionRepository.findByPatientName(anyString())).thenReturn(prescriptions);
+        List<Prescription> result = prescriptionController.getAllPrescription("yash");
 
-        assertEquals(list,result);
+        assertEquals(prescriptions.size(),1);
+        assertEquals(prescriptions.get(0).getPrescriptionId(),result.get(0).getPrescriptionId());
+        assertEquals(prescriptions.get(0).getAppointmentId(),result.get(0).getAppointmentId());
+        assertEquals(prescriptions.get(0).getDescription(),result.get(0).getDescription());
+        assertEquals(prescriptions.get(0).getPatientName(),result.get(0).getPatientName());
+        assertEquals(prescriptions.get(0).getDoctorName(),result.get(0).getDoctorName());
+
+
     }
 
     @Test
     public void savePrescriptionTest(){
-        Prescription prescription1 = new Prescription();
+        Prescription prescription1 = new Prescription("01pres","01","this medicin is for headache","yash","Dr.bala");
         when(prescriptionRepository.save(any(Prescription.class))).thenReturn(prescription1);
         Prescription result = prescriptionController.savePrescription(prescription);
 
-        assertEquals(prescription1,result);
+
+        assertEquals(prescription1.getPrescriptionId(),result.getPrescriptionId());
+        assertEquals(prescription1.getAppointmentId(),result.getAppointmentId());
+        assertEquals(prescription1.getPatientName(),result.getPatientName());
+        assertEquals(prescription1.getDoctorName(),result.getDoctorName());
+        assertEquals(prescription1.getDescription(),result.getDescription());
     }
 }
